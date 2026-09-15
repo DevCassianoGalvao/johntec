@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,600;1,700;1,800&amp;display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#0a0a0a}
+  a{color:#D7FF3D;text-decoration:none}
+  a:hover{color:#eaffa0}
+  ::selection{background:#D7FF3D;color:#0a0a0a}
+  @keyframes jtMarquee{from{transform:translateX(0)}to{transform:translateX(-33.3333%)}}
+  image-slot[data-hide-empty]::part(empty){opacity:0}
+  [data-nova-glow]:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 0 26px rgba(215,255,61,.42)}
+  [data-nova-glow]:hover [data-nova-mask]{opacity:1}
+  [data-nova-glow]:hover [data-nova-outer]{opacity:.85}
+  [data-nova-glow]:hover [data-nova-shine]{transform:translateX(38%);opacity:1}
+</style>
+<script src="./image-slot.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+</helmet>
+
+<div ref="{{ rootRef }}" style="position:relative;background:#0a0a0a;color:#f5f4f0;font-family:'Hanken Grotesk',ui-sans-serif,system-ui,sans-serif;--bg:#0a0a0a;--bg-deep:#050505;--panel:#141414;--panel-2:#101010;--line:rgba(255,255,255,.10);--line-soft:rgba(255,255,255,.06);--ink:#f5f4f0;--ink-dim:rgba(245,244,240,.62);--ink-faint:rgba(245,244,240,.36);--lime:#D7FF3D;--lime-deep:#AEDD00;--ink-on-lime:#0d1000;--amber:#F0B429">
+
+  <!-- SECTION 1 — HERO -->
+  <section style="position:relative;padding:64px 20px 56px;overflow:hidden;isolation:isolate">
+    <div style="position:absolute;top:-22%;right:-14%;width:min(70vw,900px);height:min(70vw,900px);background:radial-gradient(circle,rgba(215,255,61,.20),transparent 62%);filter:blur(30px);pointer-events:none;z-index:0"></div>
+    <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0;mask-image:radial-gradient(ellipse at top,black,transparent 72%);-webkit-mask-image:radial-gradient(ellipse at top,black,transparent 72%)"></div>
+
+    <div style="position:relative;z-index:1;max-width:1120px;margin:0 auto">
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:44px" data-hero-in="">
+        
+        
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:48px;align-items:center">
+
+        <div style="flex:1 1 460px;min-width:0">
+          <h1 style="margin:0;font-weight:800;font-size:clamp(22px,3.4vw,34px);line-height:1.16;letter-spacing:-0.015em" data-hero-in="">
+            <img src="uploads/LOGO.png" alt="JohnTec" style="height: 53px; width: 152px; display: block; filter: drop-shadow(0 0 18px rgba(215,255,61,.18))"><span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim)">Itaituba · PA</span><span style="display: block; color: var(--ink); font-size: 46px">Trincou só o vidro?<br>A gente troca só o vidro.</span>
+            <span style="display:block;color:var(--lime);font-style:italic;font-weight:800;margin-top:4px;font-size:0.82em">Até 40% mais barato.</span>
+          </h1>
+          <p style="margin:22px 0 0;font-size:clamp(15px,2vw,18px);line-height:1.6;color:var(--ink-dim);max-width:58ch" data-hero-in="">Assistência técnica em Itaituba há 4 anos. Vidro, tela, bateria, placa e áudio. iPhone e todas as marcas. Manda o modelo e uma foto do problema e recebe o valor, sem compromisso.</p>
+          <p style="margin:22px 0 0;font-size:14px;color:var(--ink-faint)" data-hero-in="">Manda o modelo no WhatsApp e a gente te passa o valor antes de mexer em qualquer coisa.</p>
+          <a href="{{ waHero }}" target="_blank" rel="noopener" data-hero-in="" data-nova-glow="" style="margin-top:20px;position:relative;display:inline-flex;align-items:center;gap:10px;overflow:hidden;isolation:isolate;border-radius:999px;padding:17px 28px;background:var(--lime);color:var(--ink-on-lime);font-weight:800;font-size:16px;border:1px solid rgba(13,16,0,.22);text-decoration:none;box-shadow:0 0 12px rgba(215,255,61,.28);transition:transform .22s ease,box-shadow .22s ease">
+            <span aria-hidden="" data-nova-mask="" style="position:absolute;inset:0;border-radius:999px;padding:2px;background:conic-gradient(from var(--nova-rot,0deg),#5c6b00 0deg,var(--lime) 70deg,#f2ffbe 135deg,transparent 190deg,#5c6b00 260deg,var(--lime) 360deg);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:1;opacity:.85;transition:opacity .22s ease"></span>
+            <span aria-hidden="" data-nova-outer="" style="position:absolute;inset:-16px;border-radius:999px;background:conic-gradient(from var(--nova-rot,0deg),transparent 0deg,var(--lime) 72deg,#f2ffbe 135deg,transparent 210deg,#5c6b00 290deg,transparent 360deg);filter:blur(16px);opacity:.45;pointer-events:none;z-index:0;transition:opacity .22s ease"></span>
+            <span aria-hidden="" data-nova-shine="" style="position:absolute;inset:2px;border-radius:999px;background:linear-gradient(110deg,transparent 0%,rgba(13,16,0,.06) 35%,rgba(13,16,0,.18) 50%,rgba(13,16,0,.06) 65%,transparent 100%);transform:translateX(-38%);opacity:.5;pointer-events:none;z-index:2;transition:transform .65s cubic-bezier(.2,.8,.2,1),opacity .22s ease"></span>
+            <span style="position:relative;z-index:3;display:inline-flex;align-items:center;gap:10px">Quero meu orçamento no WhatsApp <span style="font-size:18px">→</span></span>
+          </a>
+
+          <div style="display:flex;flex-wrap:wrap;gap:28px;margin-top:36px">
+            <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;width:120px" data-reveal="">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 17l-5.6 3.1 1.4-6.3-4.8-4.3 6.4-.6L12 3z"></path></svg>
+              <div style="font-size:12.5px;font-weight:600;line-height:1.35;color:var(--ink-dim)">{{ selo1Text }}</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;width:120px" data-reveal="">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"></path><path d="M9 12l2 2 4-4" stroke-linecap="round"></path></svg>
+              <div style="font-size:12.5px;font-weight:600;line-height:1.35;color:var(--ink-dim)">Único em Itaituba com troca de vidro</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;width:120px" data-reveal="">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.6" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"></path></svg>
+              <div style="font-size:12.5px;font-weight:600;line-height:1.35;color:var(--ink-dim)">Bateria em até 30 min</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;width:120px" data-reveal="">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.6" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path></svg>
+              <div style="font-size:12.5px;font-weight:600;line-height:1.35;color:var(--ink-dim)">Parcela em até 12x</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex:1 1 300px;min-width:260px">
+          <div style="position:relative;aspect-ratio:3/4" data-reveal="">
+            <img src="assets/hero-antes-depois.png" alt="iPhone com vidro trincado antes e depois do reparo" style="width:100%;height:100%;object-fit:contain;display:block">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 2 — PROVA -->
+  <section style="position:relative;background:var(--bg-deep);padding:0 0 88px;border-top:1px solid var(--line-soft);overflow:hidden;isolation:isolate">
+    <div style="position:absolute;top:10%;left:-12%;width:min(50vw,560px);height:min(50vw,560px);background:radial-gradient(circle,rgba(215,255,61,.12),transparent 65%);filter:blur(30px);pointer-events:none;z-index:0"></div>
+
+    <div style="overflow:hidden;background:var(--panel-2);border-bottom:1px solid var(--line-soft);padding:18px 0;position:relative;z-index:1">
+      <div style="display:flex;flex-wrap:nowrap;width:max-content;animation:jtMarquee 34s linear infinite">
+        <sc-for list="{{ defeitosLoop }}" as="d" hint-placeholder-count="18">
+          <span style="flex-shrink:0;display:flex;align-items:center;font-size:14px;font-weight:300;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-dim);white-space:nowrap">{{ d }}<span style="width:1.5px;height:16px;margin:0 20px;background:linear-gradient(to bottom,#000000,#6b6b6b);flex:none"></span></span>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:64px 20px 0">
+      <h2 style="margin:0;font-weight:800;font-size:clamp(26px,4.4vw,42px);letter-spacing:-0.015em;text-align:center" data-reveal="">Chegou assim. Saiu assim.</h2>
+      <p style="margin:14px auto 0;font-size:15.5px;color:var(--ink-dim);max-width:60ch;text-align:center" data-reveal="">Aparelho que a maioria das assistências manda trocar inteiro ou desiste.</p>
+
+      <div style="margin:40px auto 0;max-width:640px;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:clamp(24px,4vw,44px);display:flex;flex-direction:column;gap:14px;text-align:center" data-reveal="">
+        <p style="margin:0;font-size:clamp(16px,2vw,19px);color:var(--ink)">Quase toda assistência troca o display inteiro. A gente troca só o vidro.</p>
+        <p style="margin:0;font-size:15px;line-height:1.65;color:var(--ink-dim)">Se a imagem e o toque estão funcionando, não faz sentido você pagar por uma tela nova. Com a laminadora a vácuo a gente remove só o vidro danificado e preserva o seu display original de fábrica: até 40% de economia sem perder a qualidade de imagem.</p>
+        <p style="margin:8px 0 0;font-size:clamp(18px,2.6vw,24px);font-weight:800;color:var(--lime)">Mesma imagem. Mesmo toque. Menos dinheiro.</p>
+      </div>
+
+      <div style="margin-top:52px;max-width:640px;margin-left:auto;margin-right:auto">
+        <sc-for list="{{ beforeAfter }}" as="item" hint-placeholder-count="1">
+          <div style="display:flex;flex-direction:column;gap:12px" data-reveal="">
+            <div data-ba-slider="" style="position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3;background:var(--panel-2);cursor:ew-resize;touch-action:none">
+              <div style="position:absolute;inset:0"><image-slot id="{{ item.idDepois }}" shape="rect" placeholder="DEPOIS" src="assets/depois.png" style="width:100%;height:100%"></image-slot></div>
+              <div data-ba-before="" style="position:absolute;inset:0;clip-path:inset(0 50% 0 0)"><image-slot id="{{ item.idAntes }}" shape="rect" placeholder="ANTES" src="assets/antes.png" data-hide-empty="" style="width:100%;height:100%"></image-slot></div>
+              <div style="position:absolute;top:10px;left:10px;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;background:rgba(0,0,0,.55);color:#fff;padding:4px 8px;border-radius:6px;pointer-events:none">Antes</div>
+              <div style="position:absolute;top:10px;right:10px;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;background:rgba(0,0,0,.55);color:#fff;padding:4px 8px;border-radius:6px;pointer-events:none">Depois</div>
+              <div data-ba-handle="" style="position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--lime);pointer-events:none">
+                <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;color:var(--ink-on-lime);font-size:13px;font-weight:800;box-shadow:0 4px 14px rgba(0,0,0,.4);pointer-events:auto;cursor:ew-resize">↔</div>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="margin-top:48px;padding:clamp(22px,3vw,32px);border:1px solid var(--line);border-radius:20px;background:var(--panel)" data-reveal="">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:24px">
+          <div style="font-size:clamp(40px,7vw,64px);font-weight:900;color:var(--lime);line-height:1" data-count-rating="">0,0</div>
+          <div style="flex:1;min-width:200px">
+            <div style="display:flex;gap:3px">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.6"><path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 17l-5.6 3.1 1.4-6.3-4.8-4.3 6.4-.6L12 3z"></path></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.6"><path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 17l-5.6 3.1 1.4-6.3-4.8-4.3 6.4-.6L12 3z"></path></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.6"><path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 17l-5.6 3.1 1.4-6.3-4.8-4.3 6.4-.6L12 3z"></path></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.6"><path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 17l-5.6 3.1 1.4-6.3-4.8-4.3 6.4-.6L12 3z"></path></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.6"><path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 17l-5.6 3.1 1.4-6.3-4.8-4.3 6.4-.6L12 3z"></path></svg>
+            </div>
+            <p style="margin:6px 0 0;font-weight:700;font-size:15px"><span data-count-reviews="">0</span> avaliações no Google</p>
+            <p style="margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)">Nenhuma nota abaixo de 5 em 4 anos de Itaituba.</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:24px;padding-bottom:6px">
+          <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="3">
+            <div style="flex:0 0 auto;width:min(300px,78vw);scroll-snap-align:start;background:var(--panel-2);border:1px solid var(--line-soft);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:center;gap:10px">
+                <div style="width:38px;height:38px;border-radius:50%;overflow:hidden;border:1px solid var(--line);flex:none"><image-slot id="{{ r.id }}" shape="circle" placeholder="Foto"></image-slot></div>
+                <div>
+                  <div style="font-size:12.5px;font-weight:700;color:var(--amber)">[Nome do cliente]</div>
+                  <div style="display:flex;gap:2px">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.8"><path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 17l-5.6 3.1 1.4-6.3-4.8-4.3 6.4-.6L12 3z"></path></svg>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.8"><path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 17l-5.6 3.1 1.4-6.3-4.8-4.3 6.4-.6L12 3z"></path></svg>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.8"><path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 17l-5.6 3.1 1.4-6.3-4.8-4.3 6.4-.6L12 3z"></path></svg>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.8"><path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 17l-5.6 3.1 1.4-6.3-4.8-4.3 6.4-.6L12 3z"></path></svg>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.8"><path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 17l-5.6 3.1 1.4-6.3-4.8-4.3 6.4-.6L12 3z"></path></svg>
+                  </div>
+                </div>
+              </div>
+              <p style="margin:0;font-size:12.5px;line-height:1.55;color:var(--ink-dim)">[Aguardando avaliação real do Google]</p>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <p style="margin:56px auto 0;font-size:clamp(16px,2.2vw,20px);font-weight:700;line-height:1.4;max-width:56ch;text-align:center" data-reveal="">Não achou o seu defeito aqui? Manda uma foto que a gente avalia e te diz se tem conserto.</p>
+      <a href="{{ waProva }}" target="_blank" rel="noopener" data-reveal="" data-nova-glow="" style="margin:22px auto 0;width:fit-content;position:relative;display:flex;align-items:center;gap:10px;overflow:hidden;isolation:isolate;border-radius:999px;padding:17px 28px;background:var(--lime);color:var(--ink-on-lime);font-weight:800;font-size:16px;border:1px solid rgba(13,16,0,.22);text-decoration:none;box-shadow:0 0 12px rgba(215,255,61,.28);transition:transform .22s ease,box-shadow .22s ease">
+        <span aria-hidden="" data-nova-mask="" style="position: absolute; inset: 0; border-radius: 999px; padding: 2px; background: conic-gradient(from var(--nova-rot,0deg),#5c6b00 0deg,var(--lime) 70deg,#f2ffbe 135deg,transparent 190deg,#5c6b00 260deg,var(--lime) 360deg); -webkit-mask: linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; z-index: 1; opacity: .85; transition: opacity .22s ease; left: 1px; top: 0px"></span>
+        <span aria-hidden="" data-nova-outer="" style="position:absolute;inset:-16px;border-radius:999px;background:conic-gradient(from var(--nova-rot,0deg),transparent 0deg,var(--lime) 72deg,#f2ffbe 135deg,transparent 210deg,#5c6b00 290deg,transparent 360deg);filter:blur(16px);opacity:.45;pointer-events:none;z-index:0;transition:opacity .22s ease"></span>
+        <span aria-hidden="" data-nova-shine="" style="position:absolute;inset:2px;border-radius:999px;background:linear-gradient(110deg,transparent 0%,rgba(13,16,0,.06) 35%,rgba(13,16,0,.18) 50%,rgba(13,16,0,.06) 65%,transparent 100%);transform:translateX(-38%);opacity:.5;pointer-events:none;z-index:2;transition:transform .65s cubic-bezier(.2,.8,.2,1),opacity .22s ease"></span>
+        <span style="position:relative;z-index:3;display:inline-flex;align-items:center;gap:10px">Quero meu orçamento no WhatsApp <span style="font-size:18px">→</span></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- SECTION 3 — COMO FUNCIONA -->
+  <section style="position:relative;background:var(--bg);padding:88px 20px 96px;overflow:hidden;isolation:isolate">
+    <div style="position:absolute;bottom:-10%;right:-12%;width:min(55vw,600px);height:min(55vw,600px);background:radial-gradient(circle,rgba(215,255,61,.10),transparent 65%);filter:blur(30px);pointer-events:none;z-index:0"></div>
+    <div style="position:relative;z-index:1;max-width:1120px;margin:0 auto">
+      <h2 style="margin:0 auto;font-weight:800;font-size:clamp(26px,4.4vw,42px);letter-spacing:-0.015em;max-width:20ch;text-align:center" data-reveal="">Simples assim: foto, valor, celular na mão.</h2>
+
+      <div style="display:flex;flex-wrap:wrap;gap:24px;margin-top:44px">
+        <sc-for list="{{ steps }}" as="step" hint-placeholder-count="3">
+          <div style="position:relative;flex:1 1 260px;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px;overflow:hidden;transition:border-color .2s" style-hover="border-color:var(--lime)" data-reveal="">
+            <div style="position:absolute;top:10px;right:16px;font-size:52px;font-weight:900;color:var(--line-soft);line-height:1;pointer-events:none">0{{ step.num }}</div>
+            <div style="position:relative;width:40px;height:40px;border-radius:50%;background:var(--lime);color:var(--ink-on-lime);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px">{{ step.num }}</div>
+            <p style="position:relative;margin:16px 0 0;font-size:15.5px;line-height:1.55">
+              <strong>{{ step.bold }}</strong>
+              <sc-if value="{{ step.rest }}" hint-placeholder-val="{{ true }}"> {{ step.rest }}</sc-if>
+              <sc-if value="{{ step.pend }}" hint-placeholder-val="{{ false }}"><span style="color:var(--amber);border-bottom:1px dashed var(--amber);padding:0 2px" title="Aguardando confirmação do cliente">{{ step.pend }}</span></sc-if>
+            </p>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:32px;margin-top:68px">
+        <sc-for list="{{ motivos }}" as="m" hint-placeholder-count="3">
+          <div style="flex:1 1 260px" data-reveal="">
+            <div style="width:28px;height:3px;background:var(--lime);margin-bottom:14px"></div>
+            <h4 style="margin:0;font-size:16.5px;font-weight:800;line-height:1.3">{{ m.title }}</h4>
+            <p style="margin:10px 0 0;font-size:14px;line-height:1.6;color:var(--ink-dim)">{{ m.desc }}</p>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="max-width:680px;margin:80px auto 0" data-reveal="">
+        <div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);text-align:center;margin-bottom:16px">FAQ</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <sc-for list="{{ faq }}" as="item" hint-placeholder-count="4">
+            <div style="background:var(--panel);border:1px solid {{ item.borderColor }};border-radius:14px;overflow:hidden;transition:border-color .25s">
+              <a href="javascript:void(0)" onClick="{{ item.toggle }}" style="box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;width:100%;padding:18px 20px;gap:16px;color:var(--ink)" style-hover="opacity:.8">
+                <span style="font-size:15px;font-weight:700">{{ item.q }}</span>
+                <span style="position:relative;width:18px;height:18px;flex:none">
+                  <span style="position:absolute;top:50%;left:0;width:100%;height:2px;background:var(--lime);transform:translateY(-50%)"></span>
+                  <span style="position:absolute;top:0;left:50%;width:2px;height:100%;background:var(--lime);transform:translateX(-50%) rotate({{ item.barRotate }}deg);transition:transform .25s"></span>
+                </span>
+              </a>
+              <sc-if value="{{ item.open }}" hint-placeholder-val="{{ false }}">
+                <p style="margin:0;padding:0 20px 20px;font-size:14px;line-height:1.6;color:var(--ink-dim)">{{ item.before }}<sc-if value="{{ item.pend }}" hint-placeholder-val="{{ false }}"><span style="color:var(--amber);border-bottom:1px dashed var(--amber);padding:0 2px" title="Aguardando confirmação do cliente">{{ item.pend }}</span></sc-if>{{ item.after }}</p>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section style="background:#F3F2ED;color:#0a0a0a;padding:80px 20px">
+    <div style="max-width:640px;margin:0 auto;text-align:center" data-reveal="">
+      <p style="margin:0;font-size:clamp(20px,3vw,28px);font-weight:800;line-height:1.4;color:#0a0a0a">Seu celular não precisa virar sucata nem custar uma fortuna. Manda uma foto no WhatsApp e descobre agora quanto custa consertar e se vale a pena.</p>
+      <a href="{{ waFinal }}" target="_blank" rel="noopener" data-nova-glow="" style="margin-top:28px;position:relative;display:inline-flex;align-items:center;gap:10px;overflow:hidden;isolation:isolate;border-radius:999px;padding:17px 28px;background:var(--lime);color:var(--ink-on-lime);font-weight:800;font-size:16px;border:1px solid rgba(13,16,0,.22);text-decoration:none;box-shadow:0 0 12px rgba(215,255,61,.28);transition:transform .22s ease,box-shadow .22s ease">
+        <span aria-hidden="" data-nova-mask="" style="position:absolute;inset:0;border-radius:999px;padding:2px;background:conic-gradient(from var(--nova-rot,0deg),#5c6b00 0deg,var(--lime) 70deg,#f2ffbe 135deg,transparent 190deg,#5c6b00 260deg,var(--lime) 360deg);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:1;opacity:.85;transition:opacity .22s ease"></span>
+        <span aria-hidden="" data-nova-outer="" style="position:absolute;inset:-16px;border-radius:999px;background:conic-gradient(from var(--nova-rot,0deg),transparent 0deg,var(--lime) 72deg,#f2ffbe 135deg,transparent 210deg,#5c6b00 290deg,transparent 360deg);filter:blur(16px);opacity:.45;pointer-events:none;z-index:0;transition:opacity .22s ease"></span>
+        <span aria-hidden="" data-nova-shine="" style="position:absolute;inset:2px;border-radius:999px;background:linear-gradient(110deg,transparent 0%,rgba(13,16,0,.06) 35%,rgba(13,16,0,.18) 50%,rgba(13,16,0,.06) 65%,transparent 100%);transform:translateX(-38%);opacity:.5;pointer-events:none;z-index:2;transition:transform .65s cubic-bezier(.2,.8,.2,1),opacity .22s ease"></span>
+        <span style="position:relative;z-index:3;display:inline-flex;align-items:center;gap:10px">Quero meu orçamento no WhatsApp <span style="font-size:18px">→</span></span>
+      </a>
+    </div>
+  </section>
+
+  <footer style="background:var(--bg-deep);border-top:1px solid var(--line-soft);padding:52px 20px 32px">
+    <div style="max-width:1120px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px">
+      <div>
+        <img src="uploads/LOGO.png" alt="JohnTec" style="height:30px;width:auto;opacity:.9">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;font-size:13px;line-height:1.6;color:var(--ink-dim)">
+        <p style="margin:0;font-weight:700;color:var(--ink)">Assistência técnica em Itaituba, PA</p>
+        <div style="display:flex;align-items:flex-start;gap:8px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="flex:none;margin-top:1px"><path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+          <span>Travessa João Pessoa, 613 - Bela Vista, Itaituba - PA, 68180-630</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:8px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="flex:none;margin-top:1px"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>
+          <span>Fecha às 18:30</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;font-size:13px;color:var(--ink-dim)">
+        <a href="{{ waFinal }}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;color:var(--ink-dim)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="flex:none"><path d="M4 5h16v11H8l-4 4V5z"></path></svg>
+          (93) 99122-1430
+        </a>
+        <a href="https://instagram.com/johntec" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;color:var(--ink-dim)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="flex:none"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"></circle></svg>
+          @johntec
+        </a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;whatsappNumber&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;5593991221430&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;WhatsApp&quot;},&quot;reviewScore&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;5,0&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Google&quot;},&quot;reviewCount&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:68,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Google&quot;,&quot;min&quot;:0,&quot;max&quot;:9999}}">
+class Component extends DCLogic {
+  rootRef = React.createRef();
+  state = { faqOpen: -1 };
+
+  toggleFaq(i) {
+    this.setState(s => ({ faqOpen: s.faqOpen === i ? -1 : i }));
+  }
+
+  componentDidMount() {
+    this._mounted = true;
+    this.initGsap();
+    this.initCompareSliders();
+    this.initNovaGlow();
+  }
+
+  componentWillUnmount() {
+    this._mounted = false;
+    if (this._novaRaf) cancelAnimationFrame(this._novaRaf);
+  }
+
+  initNovaGlow() {
+    const root = this.rootRef.current;
+    if (!root) return;
+    const start = performance.now();
+    const loop = (t) => {
+      const rot = ((t - start) / 1000 * 28) % 360;
+      root.style.setProperty('--nova-rot', rot + 'deg');
+      this._novaRaf = requestAnimationFrame(loop);
+    };
+    this._novaRaf = requestAnimationFrame(loop);
+  }
+
+  initGsap() {
+    const tryStart = () => {
+      if (!this._mounted) return;
+      if (!window.gsap) { requestAnimationFrame(tryStart); return; }
+      const gsap = window.gsap;
+      if (window.ScrollTrigger) gsap.registerPlugin(window.ScrollTrigger);
+      const root = this.rootRef.current;
+      if (!root) return;
+
+      const heroEls = root.querySelectorAll('[data-hero-in]');
+      gsap.fromTo(heroEls, { y: 22 }, { y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.09, delay: 0.1 });
+
+      const reveals = root.querySelectorAll('[data-reveal]');
+      reveals.forEach((el) => {
+        gsap.fromTo(el, { y: 28 }, {
+          y: 0, duration: 0.75, ease: 'power2.out',
+          scrollTrigger: { trigger: el, start: 'top 88%' }
+        });
+      });
+
+      const ratingEl = root.querySelector('[data-count-rating]');
+      if (ratingEl) {
+        const target = parseFloat(String(this.props.reviewScore ?? '5,0').replace(',', '.')) || 5;
+        const obj = { v: 0 };
+        gsap.to(obj, {
+          v: target, duration: 1.3, ease: 'power1.out',
+          scrollTrigger: { trigger: ratingEl, start: 'top 85%', once: true },
+          onUpdate: () => { ratingEl.textContent = obj.v.toFixed(1).replace('.', ','); }
+        });
+      }
+      const countEl = root.querySelector('[data-count-reviews]');
+      if (countEl) {
+        const target = this.props.reviewCount ?? 68;
+        const obj = { v: 0 };
+        gsap.to(obj, {
+          v: target, duration: 1.3, ease: 'power1.out',
+          scrollTrigger: { trigger: countEl, start: 'top 85%', once: true },
+          onUpdate: () => { countEl.textContent = Math.round(obj.v); }
+        });
+      }
+    };
+    tryStart();
+  }
+
+  initCompareSliders() {
+    const root = this.rootRef.current;
+    if (!root) return;
+    const sliders = root.querySelectorAll('[data-ba-slider]');
+    sliders.forEach((slider) => {
+      const beforeWrap = slider.querySelector('[data-ba-before]');
+      const handle = slider.querySelector('[data-ba-handle]');
+      if (!beforeWrap || !handle) return;
+      let dragging = false;
+      const setPos = (clientX) => {
+        const rect = slider.getBoundingClientRect();
+        let pct = ((clientX - rect.left) / rect.width) * 100;
+        pct = Math.max(4, Math.min(96, pct));
+        beforeWrap.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+        handle.style.left = pct + '%';
+      };
+      const rect0 = slider.getBoundingClientRect();
+      setPos(rect0.left + rect0.width / 2);
+      const down = (e) => { dragging = true; try { slider.setPointerCapture(e.pointerId); } catch (err) {} setPos(e.clientX); };
+      const move = (e) => { if (dragging) setPos(e.clientX); };
+      const up = () => { dragging = false; };
+      handle.addEventListener('pointerdown', down);
+      slider.addEventListener('pointermove', move);
+      slider.addEventListener('pointerup', up);
+      slider.addEventListener('pointerleave', up);
+      slider.addEventListener('click', (e) => { if (e.target === handle) return; setPos(e.clientX); });
+    });
+  }
+
+  renderVals() {
+    const waDigits = String(this.props.whatsappNumber ?? '5593991221430').replace(/\D/g, '');
+    const waLink = (msg) => `https://wa.me/${waDigits}?text=${encodeURIComponent(msg)}`;
+    const reviewScore = this.props.reviewScore ?? '5,0';
+    const reviewCount = this.props.reviewCount ?? 68;
+
+    const selo1Text = `Nota ${reviewScore} no Google (${reviewCount} avaliações)`;
+
+    const defeitos = ['Vidro trincado', 'Tela sem imagem', 'Bateria viciada', 'Desliga sozinho', 'Sem som', 'Caiu, molhou ou não liga'];
+    const defeitosLoop = defeitos.concat(defeitos, defeitos);
+
+    const beforeAfter = [
+      { idAntes: 'ba1-antes', idDepois: 'ba1-depois' }
+    ];
+    const reviews = [{ id: 'review-1' }, { id: 'review-2' }, { id: 'review-3' }];
+
+    const steps = [
+      { num: '1', bold: 'Você manda o modelo e uma foto do problema no WhatsApp.', rest: '', pend: null },
+      { num: '2', bold: 'A gente passa o valor antes de mexer em qualquer coisa.', rest: 'Você decide com o preço na mão.', pend: null },
+      { num: '3', bold: 'Aparelho pronto, bateria em até 30 minutos.', rest: 'Você espera na loja e sai com o celular.', pend: null }
+    ];
+
+    const motivos = [
+      { title: 'Troca só o vidro, mantém seu display original.', desc: 'Laminadora a vácuo, única em Itaituba. Você paga até 40% menos e não perde qualidade de imagem.' },
+      { title: 'Bateria trocada em até 30 minutos.', desc: 'Você não fica dias sem celular. Espera na loja e já sai com o aparelho funcionando.' },
+      { title: 'Reparo de placa e caso difícil: queda, água, não liga.', desc: 'Antes de comprar celular novo, traz aqui. Muita coisa que parece perdida tem conserto.' }
+    ];
+
+    const faqRaw = [
+      { q: 'Quanto custa?', before: 'Depende do modelo e do defeito. Manda no WhatsApp que a gente te passa o valor em ', pend: '[TEMPO DE RESPOSTA]', after: '.' },
+      { q: 'Dá pra parcelar?', before: 'Sim, em até 12x no cartão.', pend: null, after: '' },
+      { q: 'Tem garantia?', before: 'Tela original: 1 ano de garantia. Vidro, bateria e placa: ', pend: '[GARANTIA]', after: '.' },
+      { q: 'Preciso ir até a loja?', before: 'Sim. A JohnTec fica na Travessa João Pessoa, 613 - Bela Vista, Itaituba, PA.', pend: null, after: '' }
+    ];
+    const faq = faqRaw.map((item, i) => {
+      const open = this.state.faqOpen === i;
+      return {
+        ...item,
+        open,
+        borderColor: open ? 'var(--lime)' : 'var(--line)',
+        barRotate: open ? 90 : 0,
+        toggle: () => this.toggleFaq(i)
+      };
+    });
+
+    return {
+      rootRef: this.rootRef,
+      waHero: waLink('Oi, vim pelo site. Quero orçamento de troca de vidro. Meu aparelho é...'),
+      waProva: waLink('Oi, vim pelo site. Quero orçamento de reparo. Meu aparelho é...'),
+      waFinal: waLink('Oi, vim pelo site. Quero saber quanto custa consertar meu...'),
+      selo1Text, defeitos, defeitosLoop, beforeAfter, reviews, steps, motivos, faq
+    };
+  }
+}
+</script>
+</body>
+</html>
