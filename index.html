@@ -143,22 +143,17 @@
           <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="3">
             <div style="flex:0 0 auto;width:min(300px,78vw);scroll-snap-align:start;background:var(--panel-2);border:1px solid var(--line-soft);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px">
               <div style="display:flex;align-items:center;gap:10px">
-                <div style="width:38px;height:38px;border-radius:50%;overflow:hidden;border:1px solid var(--line);flex:none"><image-slot id="{{ r.id }}" shape="circle" placeholder="Foto"></image-slot></div>
+                <img src="{{ r.photo }}" alt="" style="width:38px;height:38px;border-radius:50%;object-fit:cover;border:1px solid var(--line);flex:none;background:var(--panel-2)">
                 <div>
-                  <div style="font-size:12.5px;font-weight:700;color:var(--amber)">[Nome do cliente]</div>
-                  <div style="display:flex;gap:2px">
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.8"><path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 17l-5.6 3.1 1.4-6.3-4.8-4.3 6.4-.6L12 3z"></path></svg>
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.8"><path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 17l-5.6 3.1 1.4-6.3-4.8-4.3 6.4-.6L12 3z"></path></svg>
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.8"><path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 17l-5.6 3.1 1.4-6.3-4.8-4.3 6.4-.6L12 3z"></path></svg>
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.8"><path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 17l-5.6 3.1 1.4-6.3-4.8-4.3 6.4-.6L12 3z"></path></svg>
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.8"><path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 17l-5.6 3.1 1.4-6.3-4.8-4.3 6.4-.6L12 3z"></path></svg>
-                  </div>
+                  <div style="font-size:12.5px;font-weight:700;color:var(--amber)">{{ r.name }}</div>
+                  <div style="font-size:11px;letter-spacing:2px;color:var(--lime)">{{ r.starsText }}</div>
                 </div>
               </div>
-              <p style="margin:0;font-size:12.5px;line-height:1.55;color:var(--ink-dim)">[Aguardando avaliação real do Google]</p>
+              <p style="margin:0;font-size:12.5px;line-height:1.55;color:var(--ink-dim)">{{ r.text }}</p>
             </div>
           </sc-for>
         </div>
+        <p style="margin:16px 0 0;font-size:12px;text-align:center"><a href="https://www.google.com/search?q=John+Tec+-+Assist%C3%AAncia+T%C3%A9cnica+em+Smartphones" target="_blank" rel="noopener" style="color:var(--ink-faint);text-decoration:underline">Ver todas as avaliações no Google →</a></p>
       </div>
 
       <p style="margin:56px auto 0;font-size:clamp(16px,2.2vw,20px);font-weight:700;line-height:1.4;max-width:56ch;text-align:center" data-reveal="">Não achou o seu defeito aqui? Manda uma foto que a gente avalia e te diz se tem conserto.</p>
@@ -271,7 +266,7 @@
 <script type="text/x-dc" data-dc-script data-props="{&quot;whatsappNumber&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;5593991221430&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;WhatsApp&quot;},&quot;reviewScore&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;5,0&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Google&quot;},&quot;reviewCount&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:68,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Google&quot;,&quot;min&quot;:0,&quot;max&quot;:9999}}">
 class Component extends DCLogic {
   rootRef = React.createRef();
-  state = { faqOpen: -1 };
+  state = { faqOpen: -1, live: null };
 
   toggleFaq(i) {
     this.setState(s => ({ faqOpen: s.faqOpen === i ? -1 : i }));
@@ -282,6 +277,18 @@ class Component extends DCLogic {
     this.initGsap();
     this.initCompareSliders();
     this.initNovaGlow();
+    this.loadReviews();
+  }
+
+  async loadReviews() {
+    try {
+      const res = await fetch('/api/reviews');
+      if (!res.ok) return;
+      const data = await res.json();
+      if (this._mounted && data && data.live) this.setState({ live: data });
+    } catch (e) {
+      // API not deployed yet or offline — keep the static fallback reviews.
+    }
   }
 
   componentWillUnmount() {
@@ -377,8 +384,9 @@ class Component extends DCLogic {
   renderVals() {
     const waDigits = String(this.props.whatsappNumber ?? '5593991221430').replace(/\D/g, '');
     const waLink = (msg) => `https://wa.me/${waDigits}?text=${encodeURIComponent(msg)}`;
-    const reviewScore = this.props.reviewScore ?? '5,0';
-    const reviewCount = this.props.reviewCount ?? 68;
+    const live = this.state.live;
+    const reviewScore = live ? String(live.rating ?? '5').replace('.', ',') : (this.props.reviewScore ?? '5,0');
+    const reviewCount = live ? (live.total ?? 0) : (this.props.reviewCount ?? 68);
 
     const selo1Text = `Nota ${reviewScore} no Google (${reviewCount} avaliações)`;
 
@@ -388,7 +396,24 @@ class Component extends DCLogic {
     const beforeAfter = [
       { idAntes: 'ba1-antes', idDepois: 'ba1-depois' }
     ];
-    const reviews = [{ id: 'review-1' }, { id: 'review-2' }, { id: 'review-3' }];
+    const starsText = (rating) => {
+      const n = Math.max(0, Math.min(5, Math.round(rating || 5)));
+      return '★'.repeat(n) + '☆'.repeat(5 - n);
+    };
+    const fallbackAvatar = 'https://ui-avatars.com/api/?background=141414&color=D7FF3D&name=%3F';
+    const reviews = (live && live.reviews && live.reviews.length)
+      ? live.reviews.map((r) => ({
+          name: r.name,
+          photo: r.photo || fallbackAvatar,
+          text: r.text,
+          starsText: starsText(r.rating)
+        }))
+      : [1, 2, 3].map(() => ({
+          name: '[Nome do cliente]',
+          photo: fallbackAvatar,
+          text: '[Aguardando avaliação real do Google]',
+          starsText: '★★★★★'
+        }));
 
     const steps = [
       { num: '1', bold: 'Você manda o modelo e uma foto do problema no WhatsApp.', rest: '', pend: null },
