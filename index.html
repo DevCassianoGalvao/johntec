@@ -22,6 +22,18 @@
   [data-nova-glow]:hover [data-nova-mask]{opacity:1}
   [data-nova-glow]:hover [data-nova-outer]{opacity:.85}
   [data-nova-glow]:hover [data-nova-shine]{transform:translateX(38%);opacity:1}
+  /* JotForm review widget renders straight into the DOM (no iframe), so its
+     own navy card background can be overridden here to match the panel it
+     sits in. Broad div/section rule since the widget's classnames are
+     hashed CSS-in-JS and not stable to target individually. */
+  #JFWebsiteWidget-01a0a659a15870008e1f1db6c20b45bb88f6,
+  #JFWebsiteWidget-01a0a659a15870008e1f1db6c20b45bb88f6 div,
+  #JFWebsiteWidget-01a0a659a15870008e1f1db6c20b45bb88f6 section {
+    background-color: var(--panel) !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    border-color: var(--line) !important;
+  }
 </style>
 <script src="./image-slot.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
