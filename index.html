@@ -139,19 +139,8 @@
             <p style="margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)">Nenhuma nota abaixo de 5 em 4 anos de Itaituba.</p>
           </div>
         </div>
-        <div style="display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:24px;padding-bottom:6px">
-          <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="3">
-            <div style="flex:0 0 auto;width:min(300px,78vw);scroll-snap-align:start;background:var(--panel-2);border:1px solid var(--line-soft);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px">
-              <div style="display:flex;align-items:center;gap:10px">
-                <img src="{{ r.photo }}" alt="" style="width:38px;height:38px;border-radius:50%;object-fit:cover;border:1px solid var(--line);flex:none;background:var(--panel-2)">
-                <div>
-                  <div style="font-size:12.5px;font-weight:700;color:var(--amber)">{{ r.name }}</div>
-                  <div style="font-size:11px;letter-spacing:2px;color:var(--lime)">{{ r.starsText }}</div>
-                </div>
-              </div>
-              <p style="margin:0;font-size:12.5px;line-height:1.55;color:var(--ink-dim)">{{ r.text }}</p>
-            </div>
-          </sc-for>
+        <div style="margin-top:24px">
+          <div id="JFWebsiteWidget-01a0a659a15870008e1f1db6c20b45bb88f6"></div>
         </div>
         <p style="margin:16px 0 0;font-size:12px;text-align:center"><a href="https://www.google.com/search?q=John+Tec+-+Assist%C3%AAncia+T%C3%A9cnica+em+Smartphones" target="_blank" rel="noopener" style="color:var(--ink-faint);text-decoration:underline">Ver todas as avaliações no Google →</a></p>
       </div>
@@ -266,7 +255,7 @@
 <script type="text/x-dc" data-dc-script data-props="{&quot;whatsappNumber&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;5593991221430&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;WhatsApp&quot;},&quot;reviewScore&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;5,0&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Google&quot;},&quot;reviewCount&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:68,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Google&quot;,&quot;min&quot;:0,&quot;max&quot;:9999}}">
 class Component extends DCLogic {
   rootRef = React.createRef();
-  state = { faqOpen: -1, live: null };
+  state = { faqOpen: -1 };
 
   toggleFaq(i) {
     this.setState(s => ({ faqOpen: s.faqOpen === i ? -1 : i }));
@@ -277,18 +266,21 @@ class Component extends DCLogic {
     this.initGsap();
     this.initCompareSliders();
     this.initNovaGlow();
-    this.loadReviews();
+    this.loadJotformWidget();
   }
 
-  async loadReviews() {
-    try {
-      const res = await fetch('/api/reviews');
-      if (!res.ok) return;
-      const data = await res.json();
-      if (this._mounted && data && data.live) this.setState({ live: data });
-    } catch (e) {
-      // API not deployed yet or offline — keep the static fallback reviews.
-    }
+  loadJotformWidget() {
+    // A <script> tag written into the template's HTML never executes once
+    // React mounts it (browsers only run scripts parsed by the HTML parser,
+    // not ones inserted via the DOM API) — so the widget's own embed script
+    // has to be injected here instead. Guarded by id so remounts don't load
+    // it twice.
+    if (document.getElementById('jf-website-widget-script')) return;
+    const s = document.createElement('script');
+    s.id = 'jf-website-widget-script';
+    s.src = 'https://www.jotform.com/website-widgets/embed/01a0a659a15870008e1f1db6c20b45bb88f6';
+    s.async = true;
+    document.body.appendChild(s);
   }
 
   componentWillUnmount() {
@@ -384,9 +376,8 @@ class Component extends DCLogic {
   renderVals() {
     const waDigits = String(this.props.whatsappNumber ?? '5593991221430').replace(/\D/g, '');
     const waLink = (msg) => `https://wa.me/${waDigits}?text=${encodeURIComponent(msg)}`;
-    const live = this.state.live;
-    const reviewScore = live ? String(live.rating ?? '5').replace('.', ',') : (this.props.reviewScore ?? '5,0');
-    const reviewCount = live ? (live.total ?? 0) : (this.props.reviewCount ?? 68);
+    const reviewScore = this.props.reviewScore ?? '5,0';
+    const reviewCount = this.props.reviewCount ?? 68;
 
     const selo1Text = `Nota ${reviewScore} no Google (${reviewCount} avaliações)`;
 
@@ -396,24 +387,6 @@ class Component extends DCLogic {
     const beforeAfter = [
       { idAntes: 'ba1-antes', idDepois: 'ba1-depois' }
     ];
-    const starsText = (rating) => {
-      const n = Math.max(0, Math.min(5, Math.round(rating || 5)));
-      return '★'.repeat(n) + '☆'.repeat(5 - n);
-    };
-    const fallbackAvatar = 'https://ui-avatars.com/api/?background=141414&color=D7FF3D&name=%3F';
-    const reviews = (live && live.reviews && live.reviews.length)
-      ? live.reviews.map((r) => ({
-          name: r.name,
-          photo: r.photo || fallbackAvatar,
-          text: r.text,
-          starsText: starsText(r.rating)
-        }))
-      : [1, 2, 3].map(() => ({
-          name: '[Nome do cliente]',
-          photo: fallbackAvatar,
-          text: '[Aguardando avaliação real do Google]',
-          starsText: '★★★★★'
-        }));
 
     const steps = [
       { num: '1', bold: 'Você manda o modelo e uma foto do problema no WhatsApp.', rest: '', pend: null },
@@ -449,7 +422,7 @@ class Component extends DCLogic {
       waHero: waLink('Oi, vim pelo site. Quero orçamento de troca de vidro. Meu aparelho é...'),
       waProva: waLink('Oi, vim pelo site. Quero orçamento de reparo. Meu aparelho é...'),
       waFinal: waLink('Oi, vim pelo site. Quero saber quanto custa consertar meu...'),
-      selo1Text, defeitos, defeitosLoop, beforeAfter, reviews, steps, motivos, faq
+      selo1Text, defeitos, defeitosLoop, beforeAfter, steps, motivos, faq
     };
   }
 }
