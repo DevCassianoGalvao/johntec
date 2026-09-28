@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>JohnTec - Assistência Técnica em Smartphones</title>
-<link rel="icon" type="image/png" href="uploads/LOGO.png">
+<link rel="icon" type="image/png" href="uploads/favicon.png">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -47,7 +47,7 @@
 
         <div style="flex:1 1 460px;min-width:0">
           <h1 style="margin:0;font-weight:800;font-size:clamp(22px,3.4vw,34px);line-height:1.16;letter-spacing:-0.015em" data-hero-in="">
-            <img src="uploads/LOGO.png" alt="JohnTec" style="height: 53px; width: 152px; display: block; filter: drop-shadow(0 0 18px rgba(215,255,61,.18))"><span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim)">Itaituba · PA</span><span style="display: block; color: var(--ink); font-size: 46px">Trincou só o vidro?<br>A gente troca só o vidro.</span>
+            <img src="uploads/LOGO.webp" alt="JohnTec" style="height: 53px; width: 152px; display: block; filter: drop-shadow(0 0 18px rgba(215,255,61,.18))"><span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim)">Itaituba · PA</span><span style="display: block; color: var(--ink); font-size: 46px">Trincou só o vidro?<br>A gente troca só o vidro.</span>
             <span style="display:block;color:var(--lime);font-style:italic;font-weight:800;margin-top:4px;font-size:0.82em">Até 40% mais barato.</span>
           </h1>
           <p style="margin:22px 0 0;font-size:clamp(15px,2vw,18px);line-height:1.6;color:var(--ink-dim);max-width:58ch" data-hero-in="">Assistência técnica em Itaituba há 4 anos. Vidro, tela, bateria, placa e áudio. iPhone e todas as marcas. Manda o modelo e uma foto do problema e recebe o valor, sem compromisso.</p>
@@ -83,7 +83,7 @@
           <div style="position:relative;aspect-ratio:4/5" data-reveal="">
             <div style="position:absolute;inset:0;animation:jtFloat 4.5s ease-in-out infinite">
               <div style="position:absolute;inset:0;border-radius:20px;overflow:hidden">
-                <img src="assets/hero-foto.jpg" alt="Cliente segurando celular com tela original ao lado do vidro trincado substituído na JohnTec" style="width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block">
+                <img src="assets/hero-foto.webp" alt="Cliente segurando celular com tela original ao lado do vidro trincado substituído na JohnTec" style="width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block">
               </div>
               <span aria-hidden="" style="position:absolute;inset:0;border-radius:20px;padding:2px;background:conic-gradient(from var(--nova-rot,0deg),var(--lime),#000,var(--lime));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none"></span>
             </div>
@@ -122,9 +122,13 @@
         <p style="margin:8px 0 0;font-size:clamp(18px,2.6vw,24px);font-weight:800;color:var(--lime)">Mesma imagem. Mesmo toque. Menos dinheiro.</p>
       </div>
 
-      <div style="margin-top:52px;max-width:640px;margin-left:auto;margin-right:auto">
-        <div style="border-radius:16px;overflow:hidden" data-reveal="">
-          <img src="assets/prova-antes-depois.jpg" alt="Tela original ao lado do vidro trincado substituído na JohnTec" style="width:100%;height:auto;display:block">
+      <div style="margin-top:52px;max-width:1120px;margin-left:auto;margin-right:auto" data-reveal="">
+        <div style="overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)">
+          <div style="display:flex;flex-wrap:nowrap;width:max-content;gap:16px;animation:jtMarquee 44s linear infinite" style-hover="animation-play-state:paused">
+            <sc-for list="{{ portfolioLoop }}" as="p" hint-placeholder-count="18">
+              <img src="{{ p }}" alt="Reparo realizado na JohnTec" style="width:180px;height:225px;object-fit:cover;border-radius:14px;flex-shrink:0;display:block">
+            </sc-for>
+          </div>
         </div>
       </div>
 
@@ -227,7 +231,7 @@
   <footer style="background:var(--bg-deep);border-top:1px solid var(--line-soft);padding:52px 20px 32px">
     <div style="max-width:1120px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px">
       <div>
-        <img src="uploads/LOGO.png" alt="JohnTec" style="height:30px;width:auto;opacity:.9">
+        <img src="uploads/LOGO.webp" alt="JohnTec" style="height:30px;width:auto;opacity:.9">
       </div>
       <div style="display:flex;flex-direction:column;gap:12px;font-size:13px;line-height:1.6;color:var(--ink-dim)">
         <p style="margin:0;font-weight:700;color:var(--ink)">Assistência técnica em Itaituba, PA</p>
@@ -358,6 +362,16 @@ class Component extends DCLogic {
     const defeitos = ['Vidro trincado', 'Tela sem imagem', 'Bateria viciada', 'Desliga sozinho', 'Sem som', 'Caiu, molhou ou não liga'];
     const defeitosLoop = defeitos.concat(defeitos, defeitos);
 
+    const fotos = [
+      'assets/carousel/carousel-1.webp',
+      'assets/carousel/carousel-2.webp',
+      'assets/carousel/carousel-3.webp',
+      'assets/carousel/carousel-4.webp',
+      'assets/carousel/carousel-5.webp',
+      'assets/carousel/carousel-6.webp'
+    ];
+    const portfolioLoop = fotos.concat(fotos, fotos);
+
     const steps = [
       { num: '1', bold: 'Você manda o modelo e uma foto do problema no WhatsApp.', rest: '', pend: null },
       { num: '2', bold: 'A gente passa o valor antes de mexer em qualquer coisa.', rest: 'Você decide com o preço na mão.', pend: null },
@@ -392,7 +406,7 @@ class Component extends DCLogic {
       waHero: waLink('Oi, vim pelo site. Quero orçamento de troca de vidro. Meu aparelho é...'),
       waProva: waLink('Oi, vim pelo site. Quero orçamento de reparo. Meu aparelho é...'),
       waFinal: waLink('Oi, vim pelo site. Quero saber quanto custa consertar meu...'),
-      selo1Text, defeitos, defeitosLoop, steps, motivos, faq
+      selo1Text, defeitos, defeitosLoop, portfolioLoop, steps, motivos, faq
     };
   }
 }
