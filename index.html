@@ -19,6 +19,7 @@
   a:hover{color:#eaffa0}
   ::selection{background:#D7FF3D;color:#0a0a0a}
   @keyframes jtMarquee{from{transform:translateX(0)}to{transform:translateX(-33.3333%)}}
+  @keyframes jtFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
   image-slot[data-hide-empty]::part(empty){opacity:0}
   [data-nova-glow]:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 0 26px rgba(215,255,61,.42)}
   [data-nova-glow]:hover [data-nova-mask]{opacity:1}
@@ -79,8 +80,8 @@
         </div>
 
         <div style="flex:1 1 300px;min-width:260px">
-          <div style="position:relative;aspect-ratio:3/4" data-reveal="">
-            <img src="assets/hero-antes-depois.png" alt="iPhone com vidro trincado antes e depois do reparo" style="width:100%;height:100%;object-fit:contain;display:block">
+          <div style="position:relative;aspect-ratio:1/1;border-radius:20px;overflow:hidden" data-reveal="">
+            <img src="assets/hero-foto.jpg" alt="Cliente segurando celular com tela original ao lado do vidro trincado substituído na JohnTec" style="width:100%;height:100%;object-fit:cover;object-position:center 32%;display:block;animation:jtFloat 4s ease-in-out infinite">
           </div>
         </div>
       </div>
