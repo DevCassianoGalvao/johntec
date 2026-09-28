@@ -80,8 +80,17 @@
         </div>
 
         <div style="flex:1 1 300px;min-width:260px">
-          <div style="position:relative;aspect-ratio:1/1;border-radius:20px;overflow:hidden" data-reveal="">
-            <img src="assets/hero-foto.jpg" alt="Cliente segurando celular com tela original ao lado do vidro trincado substituído na JohnTec" style="width:100%;height:100%;object-fit:cover;object-position:center 32%;display:block;animation:jtFloat 4s ease-in-out infinite">
+          <div style="position:relative;aspect-ratio:4/5" data-reveal="">
+            <div style="position:absolute;inset:0;border-radius:20px;overflow:hidden">
+              <img src="assets/hero-foto.jpg" alt="Cliente segurando celular com tela original ao lado do vidro trincado substituído na JohnTec" style="width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;animation:jtFloat 4.5s ease-in-out infinite">
+            </div>
+            <span aria-hidden="" style="position:absolute;inset:0;border-radius:20px;padding:2px;background:conic-gradient(from var(--nova-rot,0deg),var(--lime),#000,var(--lime));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none"></span>
+            <div aria-hidden="" style="position:absolute;left:-16px;bottom:16px;width:46px;height:46px;border-radius:50%;background:var(--lime);color:var(--ink-on-lime);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.4);animation:jtFloat 3.6s ease-in-out infinite">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"></rect><path d="M11 18h2"></path></svg>
+            </div>
+            <div aria-hidden="" style="position:absolute;right:-16px;top:20px;width:46px;height:46px;border-radius:50%;background:var(--lime);color:var(--ink-on-lime);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.4);animation:jtFloat 5s ease-in-out infinite">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+            </div>
           </div>
         </div>
       </div>
@@ -112,19 +121,9 @@
       </div>
 
       <div style="margin-top:52px;max-width:640px;margin-left:auto;margin-right:auto">
-        <sc-for list="{{ beforeAfter }}" as="item" hint-placeholder-count="1">
-          <div style="display:flex;flex-direction:column;gap:12px" data-reveal="">
-            <div data-ba-slider="" style="position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3;background:var(--panel-2);cursor:ew-resize;touch-action:none">
-              <div style="position:absolute;inset:0"><image-slot id="{{ item.idDepois }}" shape="rect" placeholder="DEPOIS" src="assets/depois.png" style="width:100%;height:100%"></image-slot></div>
-              <div data-ba-before="" style="position:absolute;inset:0;clip-path:inset(0 50% 0 0)"><image-slot id="{{ item.idAntes }}" shape="rect" placeholder="ANTES" src="assets/antes.png" data-hide-empty="" style="width:100%;height:100%"></image-slot></div>
-              <div style="position:absolute;top:10px;left:10px;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;background:rgba(0,0,0,.55);color:#fff;padding:4px 8px;border-radius:6px;pointer-events:none">Antes</div>
-              <div style="position:absolute;top:10px;right:10px;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;background:rgba(0,0,0,.55);color:#fff;padding:4px 8px;border-radius:6px;pointer-events:none">Depois</div>
-              <div data-ba-handle="" style="position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--lime);pointer-events:none">
-                <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;color:var(--ink-on-lime);font-size:13px;font-weight:800;box-shadow:0 4px 14px rgba(0,0,0,.4);pointer-events:auto;cursor:ew-resize">↔</div>
-              </div>
-            </div>
-          </div>
-        </sc-for>
+        <div style="border-radius:16px;overflow:hidden;border:1px solid var(--line)" data-reveal="">
+          <img src="assets/prova-antes-depois.png" alt="Tela original ao lado do vidro trincado substituído na JohnTec" style="width:100%;height:auto;display:block">
+        </div>
       </div>
 
       <div style="margin-top:48px;padding:clamp(22px,3vw,32px);border:1px solid var(--line);border-radius:20px;background:var(--panel)" data-reveal="">
@@ -267,7 +266,6 @@ class Component extends DCLogic {
   componentDidMount() {
     this._mounted = true;
     this.initGsap();
-    this.initCompareSliders();
     this.initNovaGlow();
     this.loadJotformWidget();
   }
@@ -347,35 +345,6 @@ class Component extends DCLogic {
     tryStart();
   }
 
-  initCompareSliders() {
-    const root = this.rootRef.current;
-    if (!root) return;
-    const sliders = root.querySelectorAll('[data-ba-slider]');
-    sliders.forEach((slider) => {
-      const beforeWrap = slider.querySelector('[data-ba-before]');
-      const handle = slider.querySelector('[data-ba-handle]');
-      if (!beforeWrap || !handle) return;
-      let dragging = false;
-      const setPos = (clientX) => {
-        const rect = slider.getBoundingClientRect();
-        let pct = ((clientX - rect.left) / rect.width) * 100;
-        pct = Math.max(4, Math.min(96, pct));
-        beforeWrap.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
-        handle.style.left = pct + '%';
-      };
-      const rect0 = slider.getBoundingClientRect();
-      setPos(rect0.left + rect0.width / 2);
-      const down = (e) => { dragging = true; try { slider.setPointerCapture(e.pointerId); } catch (err) {} setPos(e.clientX); };
-      const move = (e) => { if (dragging) setPos(e.clientX); };
-      const up = () => { dragging = false; };
-      handle.addEventListener('pointerdown', down);
-      slider.addEventListener('pointermove', move);
-      slider.addEventListener('pointerup', up);
-      slider.addEventListener('pointerleave', up);
-      slider.addEventListener('click', (e) => { if (e.target === handle) return; setPos(e.clientX); });
-    });
-  }
-
   renderVals() {
     const waDigits = String(this.props.whatsappNumber ?? '5593991221430').replace(/\D/g, '');
     const waLink = (msg) => `https://wa.me/${waDigits}?text=${encodeURIComponent(msg)}`;
@@ -386,10 +355,6 @@ class Component extends DCLogic {
 
     const defeitos = ['Vidro trincado', 'Tela sem imagem', 'Bateria viciada', 'Desliga sozinho', 'Sem som', 'Caiu, molhou ou não liga'];
     const defeitosLoop = defeitos.concat(defeitos, defeitos);
-
-    const beforeAfter = [
-      { idAntes: 'ba1-antes', idDepois: 'ba1-depois' }
-    ];
 
     const steps = [
       { num: '1', bold: 'Você manda o modelo e uma foto do problema no WhatsApp.', rest: '', pend: null },
@@ -425,7 +390,7 @@ class Component extends DCLogic {
       waHero: waLink('Oi, vim pelo site. Quero orçamento de troca de vidro. Meu aparelho é...'),
       waProva: waLink('Oi, vim pelo site. Quero orçamento de reparo. Meu aparelho é...'),
       waFinal: waLink('Oi, vim pelo site. Quero saber quanto custa consertar meu...'),
-      selo1Text, defeitos, defeitosLoop, beforeAfter, steps, motivos, faq
+      selo1Text, defeitos, defeitosLoop, steps, motivos, faq
     };
   }
 }
